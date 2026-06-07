@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import requests
 
 # Base URL for NASA JPL Horizons API
