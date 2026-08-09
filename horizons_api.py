@@ -4,35 +4,44 @@ import requests
 # Base URL for NASA JPL Horizons API
 BASE_URL = "https://ssd.jpl.nasa.gov/api/horizons.api"
 
-commands = ["199", "299", "499", "599", "699", "799", "899", "999"]
+# commands = ["199", "299", "499", "599", "699", "799", "899", "999"]
+commands = ["199"]
 
-for cmd in commands:
-# Example parameters:
-# - 'format': 'json'      -> Output in JSON
-# - 'COMMAND': '499'      -> Identifier for the body (499 = Mars)
-# - 'EPHEM_TYPE': 'OBSERVER' -> Type of ephemeris (OBSERVER target output)
-# - 'CENTER': '399'    -> Observer (399 = Earth)
-# - 'START_TIME', 'STOP_TIME', 'STEP_SIZE' -> Time range and steps
+
+def fetch_horizons_data(cmd: str = "199"):
+    print(f"\n=== COMMAND {cmd} ===")
+
     params = {
         "format": "json",
         "COMMAND": cmd,              # Target body (e.g., 399 = Earth)
         "EPHEM_TYPE": "OBSERVER",      # Type of ephemeris data
         "CENTER": "675@399",             # Observer location (site = predifined observatory site, @399 = on Earth)
-        "START_TIME": "2026-06-07",    # Start date
-        "STOP_TIME": "2026-06-08",     # End date
-        "STEP_SIZE": "1d"             # Step size (daily)
+        "START_TIME": "2026-07-20",    # Start date
+        "STOP_TIME": "2026-07-21",     # End date
+        "STEP_SIZE": "1d",             # Step size (daily)
+        "CSV_FORMAT": "YES"
     }
 
-# Make the GET request
+    response = requests.get(BASE_URL, params=params, timeout=30)
+    print("Request URL:", response.request.url)
 
-response = requests.get(BASE_URL, params=params)
-print("Request URL:", response.request.url)
+    if response.status_code != 200:
+        raise RuntimeError(f"Error: {response.status_code}\n{response.text}")
 
-# Check response status
-if response.status_code == 200:
     data = response.json()
     print("Request successful. Summary:")
-    print(data.get("result") or data)  # Print result section or entire response
-else:
-    print(f"Error: {response.status_code}")
-    print(response.text)
+    print(data.get("result") or data)
+    return data
+
+
+data = fetch_horizons_data(commands[0])
+
+
+def main() -> int:
+    for cmd in commands:
+        fetch_horizons_data(cmd)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
