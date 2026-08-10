@@ -9,14 +9,18 @@ def fetch_horizons_data(cmd):
 
     params = {
         "format": "json",
-        "COMMAND": cmd,              # Target body (e.g., 399 = Earth)
-        "EPHEM_TYPE": "OBSERVER",      # Type of ephemeris data
-        "CENTER": "675@399",             # Observer location (site = predifined observatory site, @399 = on Earth)
+        "COMMAND": cmd,                # Target body (e.g., 399 = Earth)
+        "OBJ_DATA": "NO",
+        "EPHEM_TYPE": "VECTOR",        # Type of ephemeris data
+        "CENTER": "675@399",           # Observer location (site = predifined observatory site, @399 = on Earth)
         "START_TIME": "2026-07-20",    # Start date
         "STOP_TIME": "2026-07-21",     # End date
         "STEP_SIZE": "1d",             # Step size (daily)
-        # "CSV_FORMAT": "YES"
+        "VEC_TABLE": "2",
+        "CSV_FORMAT": "YES"
     }
+
+    # Need to update time system to take real time inputs
 
     # Base URL for NASA JPL Horizons API
     BASE_URL = "https://ssd.jpl.nasa.gov/api/horizons.api"
@@ -39,7 +43,7 @@ def fetch_horizons_data(cmd):
         sys.exit(1)
 
     print("Request successful. Summary:")
-    print(data)
+    # print(data)
     return data
 
 # if __name__ == "__main__":
