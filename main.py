@@ -3,9 +3,6 @@ from horizons_api import fetch_horizons_data
 import sys
 
 
-# Base URL for NASA JPL Horizons API
-BASE_URL = "https://ssd.jpl.nasa.gov/api/horizons.api"
-
 # Get requested NAIF-ID from commandline:
 if (len(sys.argv)) == 1:
     print("Please input planet NAIF-ID on command line.")

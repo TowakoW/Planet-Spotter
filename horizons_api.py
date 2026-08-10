@@ -18,6 +18,9 @@ def fetch_horizons_data(cmd):
         # "CSV_FORMAT": "YES"
     }
 
+    # Base URL for NASA JPL Horizons API
+    BASE_URL = "https://ssd.jpl.nasa.gov/api/horizons.api"
+
     #URL encode
     query_string = urlencode(params)
     url = f"{BASE_URL}?{query_string}"
@@ -39,5 +42,5 @@ def fetch_horizons_data(cmd):
     print(data)
     return data
 
-if __name__ == "__main__":
-    raise SystemExit(main())
+# if __name__ == "__main__":
+#     raise SystemExit(main())
