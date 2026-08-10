@@ -10,3 +10,6 @@ import numpy as np
 # Needed Information:
 # fetch_horizons_data(0) - Solar system barycenter
 # fetch_horizons_data(1) - Mars barycenter
+
+# Physics Calc:
+
