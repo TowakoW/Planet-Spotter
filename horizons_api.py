@@ -4,23 +4,6 @@ import sys
 import json
 from urllib.parse import urlencode
 
-# Base URL for NASA JPL Horizons API
-BASE_URL = "https://ssd.jpl.nasa.gov/api/horizons.api"
-
-# Get requested NAIF-ID from commandline:
-if (len(sys.argv)) == 1:
-    print("Please input planet NAIF-ID on command line.")
-    sys.exit(2)
-naifid = sys.argv[1:]
-
-# commands = ["199", "299", "499", "599", "699", "799", "899", "999"]
-# commands = ["199"]
-
-def main() -> int:
-    for cmd in naifid:
-        fetch_horizons_data(cmd)
-    return 0
-
 def fetch_horizons_data(cmd):
     print(f"\n=== COMMAND {cmd} ===")
 
@@ -53,13 +36,8 @@ def fetch_horizons_data(cmd):
         sys.exit(1)
 
     print("Request successful. Summary:")
-    print(data.get("result") or data)
+    print(data)
     return data
-
-
-# data = fetch_horizons_data(naifid)
-
-
 
 if __name__ == "__main__":
     raise SystemExit(main())
