@@ -10,7 +10,7 @@ def fetch_horizons_data(cmd):
     params = {
         "format": "json",
         "COMMAND": cmd,                # Target body (e.g., 399 = Earth)
-        "OBJ_DATA": "NO",
+        "OBJ_DATA": "YES",
         "EPHEM_TYPE": "VECTOR",        # Type of ephemeris data
         "CENTER": "@0",                # Observer location (site = predifined observatory site, @0 = SSB)
         "START_TIME": "2026-07-20",    # Start date
