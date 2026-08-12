@@ -69,7 +69,8 @@ def horizons_specifics(naifids: list[int], data_type: Literal["gm", "ephemeris"]
             print("NAIF-ID:", item["naifid"])
             print("--- EPHEMERIS LINES ---")
             for num in rows:
-                print(num)
+                # print(num)
+                return(num)
 
     # ALT: printing all output, comment out above for loop
     # print(lines)

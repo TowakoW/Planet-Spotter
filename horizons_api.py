@@ -8,8 +8,9 @@ from datetime import datetime, timedelta
 def fetch_horizons_data(cmd):
     print(f"\n=== COMMAND {cmd} ===")
 
-    start = datetime.now().strftime("%Y-%m-%d")
-    stop = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
+    # start = datetime.now().strftime("%Y-%m-%d")
+    # stop = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
+    tlist = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     params = {
         "format": "json",
@@ -17,9 +18,10 @@ def fetch_horizons_data(cmd):
         "OBJ_DATA": "YES",
         "EPHEM_TYPE": "VECTOR",        # Type of ephemeris data
         "CENTER": "@0",                # Observer location (site = predifined observatory site, @0 = SSB)
-        "START_TIME": start,           # Start time
-        "STOP_TIME": stop,             # End date
-        "STEP_SIZE": "1d",             # Step size (daily)
+        # "START_TIME": start,           # Start time
+        # "STOP_TIME": stop,             # End date
+        # "STEP_SIZE": "1d",             # Step size (daily)
+        "TLIST": f"'{tlist}'",
         "VEC_TABLE": "2",
         "CSV_FORMAT": "YES"
     }
