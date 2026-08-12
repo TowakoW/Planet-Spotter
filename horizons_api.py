@@ -3,9 +3,13 @@ import requests
 import sys
 import json
 from urllib.parse import urlencode
+from datetime import datetime, timedelta
 
 def fetch_horizons_data(cmd):
     print(f"\n=== COMMAND {cmd} ===")
+
+    start = datetime.now().strftime("%Y-%m-%d")
+    stop = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
 
     params = {
         "format": "json",
@@ -13,8 +17,8 @@ def fetch_horizons_data(cmd):
         "OBJ_DATA": "YES",
         "EPHEM_TYPE": "VECTOR",        # Type of ephemeris data
         "CENTER": "@0",                # Observer location (site = predifined observatory site, @0 = SSB)
-        "START_TIME": "2026-07-20",    # Start date
-        "STOP_TIME": "2026-07-21",     # End date
+        "START_TIME": start,           # Start time
+        "STOP_TIME": stop,             # End date
         "STEP_SIZE": "1d",             # Step size (daily)
         "VEC_TABLE": "2",
         "CSV_FORMAT": "YES"
