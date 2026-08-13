@@ -1,6 +1,5 @@
 # import functions and packages
 from horizons_api import fetch_horizons_data
-import sys
 from pprint import pprint
 from astropy import units as u
 from typing import Literal, Any
@@ -73,7 +72,7 @@ def horizons_specifics(naifids: list[int], data_type: Literal["gm", "ephemeris"]
 
             # Ephemeris data saved as a list udner "rows"
             print("NAIF-ID:", item["naifid"])
-            print("--- EPHEMERIS LINES ---")
+            # print("--- EPHEMERIS LINES ---")
             for num in rows:
                 # print(num)
                 return(num)

@@ -1,6 +1,6 @@
 import numpy as np
 from typing import Tuple, List, Optional
-from main import horizons_specifics
+from horizons_parse import horizons_specifics
 
 '''
 references:
