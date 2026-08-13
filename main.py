@@ -14,11 +14,12 @@ def horizons_specifics(naifids: list[int], data_type: Literal["gm", "ephemeris"]
     -----
     "naifids": a list of one or more NAIF-IDs to object centers
     "data_type": specify either "gm" or "ephemeris" to pull data for specified objects(s)
+
+    All values returned in km/s
     """        
-    # Get requested NAIF-ID(s) from commandline:
-    # if (len(sys.argv)) == 1:
-    #     print("Please input planet NAIF-ID on command line.")
-    #     sys.exit(2)
+    # Allow a single int NAIF-ID or an iterable of NAIF-IDs
+    if isinstance(naifids, int):
+        naifids = [naifids]
 
     # Pulls ephimeris data from NASA JPL's Horizons API
     planet_data = []
@@ -30,27 +31,32 @@ def horizons_specifics(naifids: list[int], data_type: Literal["gm", "ephemeris"]
         for item in planet_data:
             raw = item["data"]["result"]
             lines = raw.splitlines()
-        
+
             gm_line = next(
-            (line for line in lines if "GM, km^3/s^2" in line or "GM (km^3/s^2)" in line),
-            None,
+                (line for line in lines if "GM, km^3/s^2" in line or "GM (km^3/s^2)" in line),
+                None,
             )
             gm_value = None
             if gm_line:
                 parts = gm_line.split("=")
-            if len(parts) > 1:
-                gm_value = parts[1].split()[0].strip()
-        
+                if len(parts) > 1:
+                    gm_value = parts[1].split()[0].strip()
+
             gm_val_km = None
             if gm_value is not None:
-                gm_val_km = float(gm_value) * (u.km**3/u.s**2)
-        
-            # gm to (AU^3/s^2)
-            gm_val_au = gm_val_km.to(u.au ** 3 / u.s ** 2)
-            item["gm"] = gm_val_au
+                gm_val_km = float(gm_value) * (u.km**3 / u.s**2)
+                item["gm"] = gm_val_km
+
+            # # gm to (AU^3/s^2)
+            # if gm_val_km is not None:
+            #     gm_val_au = gm_val_km.to(u.au ** 3 / u.s ** 2)
+            #     item["gm"] = gm_val_au
+            # else:
+            #     item["gm"] = None
+
             print("NAIF-ID:", item["naifid"])
             print("GM:", item["gm"] if gm_line is not None else "not found")
-            return gm_val_au
+            return item.get("gm")
         
 
 

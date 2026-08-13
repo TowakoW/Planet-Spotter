@@ -3,6 +3,8 @@
 # import
 from astropy import constants as const
 import numpy as np
+from planet_data import System
+import matplotlib.pyplot as plt
 # from planet_data import System
 
 # Constants:
@@ -28,7 +30,7 @@ def plot_initial(
         Plots the initial positions.
         Parameters:
         system: System
-            system name
+            system name ("solary_system")
         labels: list
             labels for objects
         colors: list
@@ -36,3 +38,21 @@ def plot_initial(
         legend: bool
             whether to show legend or not
         """
+        # Create figure and 3d axes
+        fig = plt.figure(figsize=(8, 6))
+        ax = fig.add_subplot(projection="3d")
+        ax.set_xlabel("$x$ (KM)")
+        ax.set_ylabel("$y$ (KM)")
+        ax.set_zlabel("$z$ (KM)")
+
+        # plot initial
+        for i in range(system.num_particles):
+                ax.scatter(
+                        system.x[i, 0], system.x[i, 1], system.x[i, 2], marker="o", color=colors[i], label=labels[i]
+                )
+
+        if legend: 
+                ax.legend()
+
+        plt.show()
+
