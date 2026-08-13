@@ -48,7 +48,7 @@ def fetch_horizons_data(cmd):
         raise RuntimeError(f"Error: {response.status_code}\n{response.text}")
         sys.exit(1)
 
-    print("Request successful. Summary:")
+    print("Request successful.")
     # print(data)
     return data
 

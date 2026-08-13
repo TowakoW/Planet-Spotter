@@ -38,12 +38,20 @@ def plot_initial(
         legend: bool
             whether to show legend or not
         """
+
         # Create figure and 3d axes
-        fig = plt.figure(figsize=(8, 6))
+        fig = plt.figure(figsize=(8, 8))
         ax = fig.add_subplot(projection="3d")
         ax.set_xlabel("$x$ (KM)")
         ax.set_ylabel("$y$ (KM)")
         ax.set_zlabel("$z$ (KM)")
+
+        # Set self-centering graph size
+        max_val = int(5.5e+09)
+
+        ax.set_xlim(-max_val, max_val)
+        ax.set_ylim(-max_val, max_val)
+        ax.set_zlim(-max_val, max_val)
 
         # plot initial
         for i in range(system.num_particles):
@@ -56,3 +64,35 @@ def plot_initial(
 
         plt.show()
 
+
+# PHYSICS!!
+# Semi-implicit Euler method
+
+def acceleration(
+                a: np.ndarray,
+                system: System
+                ) -> None:
+        """
+        Computes the gravitational acceleration
+        
+        Parameters
+        -----
+        a: np.ndarray
+            Gravitational acceleration array to be modified, shape (N, 3)
+        system: System
+            System object ("solar_system")
+        
+        Reference
+        -----
+        "5 Steps to N-body Simulation" by alvinng4: 
+        https://alvinng4.github.io/grav_sim/5_steps_to_n_body_simulation/step2/#implementation-3-advanced
+        """
+        # Empty acceleration array
+        a.fill(0.0)
+
+        # Declare variables
+        x = system.x
+        GM = system.Gm
+
+        # Displacement vector
+        r_ij = x[:, np.newaxis, :] - x[np.newaxis, :, :]

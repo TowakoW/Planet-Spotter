@@ -5,14 +5,17 @@ from astropy import units as u
 from typing import Literal, Any
 
 
-def horizons_specifics(naifids: list[int], data_type: Literal["gm", "ephemeris"]) -> Any:
+def horizons_specifics(naifids: list[int], data_type: Literal["gm", "ephemeris", "all"]) -> Any:
     """
     Organizes fetched data from NASA JPL's Horizons API
 
     Parameters:
     -----
-    "naifids": a list of one or more NAIF-IDs to object centers
-    "data_type": specify either "gm" or "ephemeris" to pull data for specified objects(s)
+    "naifids": a list of one or more NAIF-IDs to object centers.
+    "data_type": specify either "gm" or "ephemeris" to pull data for specified objects(s).
+        > "gm": returns and prints GM for object.
+        > "ephemeris": returns ephemeris for object at time called (x, y, z, vx, vy, vz).
+        > "all": prints entire output from Horizons API (for debugging purposes...).
 
     All values returned in km/s
     """        
@@ -32,7 +35,7 @@ def horizons_specifics(naifids: list[int], data_type: Literal["gm", "ephemeris"]
             lines = raw.splitlines()
 
             gm_line = next(
-                (line for line in lines if "GM, km^3/s^2" in line or "GM (km^3/s^2)" in line),
+                (line for line in lines if "GM, km^3/s^2" in line or "GM (km^3/s^2)" in line or "GM (planet) km^3/s^2" in line),
                 None,
             )
             gm_value = None
@@ -76,6 +79,17 @@ def horizons_specifics(naifids: list[int], data_type: Literal["gm", "ephemeris"]
             for num in rows:
                 # print(num)
                 return(num)
+
+    if data_type == "all":
+        for item in planet_data:
+            raw = item["data"]["result"]
+            lines = raw.splitlines()
+            rows = [line.split(",") for line in lines]
+
+            print("NAIF-ID:", item["naifid"])
+            for num in rows:
+                print(num)
+
 
     # ALT: printing all output, comment out above for loop
     # print(lines)
