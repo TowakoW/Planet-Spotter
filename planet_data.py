@@ -238,7 +238,7 @@ def get_initial_conditions(initial_condition: dict
                 )
 
             system = System(
-                num_particles= 9,
+                num_particles= 10,
                 Gm=Gm,
                 x=x,
                 v=v,
