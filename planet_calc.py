@@ -79,10 +79,10 @@ def plot(
             fig.canvas.flush_events()
 
             # Stop live update after 30 seconds
-            if count > 30:
+            if count > 1:
                    plotting = False
         plt.ioff()
-        plt.show()
+        return fig
 
 
 # PHYSICS!!
