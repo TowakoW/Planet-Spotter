@@ -26,7 +26,7 @@ def plot(
         labels: list,
         colors: list,
         legend: bool,
-    ) -> None:
+    ) -> bool:
         """
         Plots the initial positions.
         Parameters:
@@ -39,6 +39,16 @@ def plot(
         legend: bool
             whether to show legend or not
         """
+
+        def quit_graph(event):
+            """
+            Conditions to manually quit the live-updating graph
+            event == q to quit
+            """
+            nonlocal plotting
+            if event.key =="q":
+                plotting = False
+                plt.close(fig)
 
         # Create figure and 3d axes
 
@@ -60,12 +70,18 @@ def plot(
         count = 0
         # plot initial
         plotting = True
+
+        # Manual stop
+        fig.canvas.mpl_connect("key_press_event", quit_graph)
+
+        # loop
         while plotting:
             count += 1
             for i in range(system.num_particles):
                 ax.scatter(
                         system.x[i, 0], system.x[i, 1], system.x[i, 2], marker="o", color=colors[i], label=labels[i]
                 )
+                plt.pause(0.01)
 
             current_time = str(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
             # Set labels
@@ -79,10 +95,13 @@ def plot(
             fig.canvas.flush_events()
 
             # Stop live update after 30 seconds
-            if count > 1:
+            if count > 30:
                    plotting = False
+
         plt.ioff()
-        return fig
+        plt.show()
+
+        
 
 
 # PHYSICS!!

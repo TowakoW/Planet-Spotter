@@ -38,12 +38,14 @@ def main() -> None:
         print("Initial Velocities (km/s):\n", system.v)
         print("Object GM (km^3/s^2):\n", system.Gm)
 
-        planet_calc.plot(
+        continue_running = planet_calc.plot(
             system=system,
             labels=labels,
             colors=colors,
             legend=legend
             )
+        if not continue_running:
+            break
 
 
 
