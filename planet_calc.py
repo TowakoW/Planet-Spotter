@@ -64,9 +64,6 @@ def plot(
         ax.set_ylim(-max_val, max_val)
         ax.set_zlim(-max_val, max_val)
 
-        if legend: 
-               ax.legend()
-
         count = 0
         # plot initial
         plotting = True
@@ -79,9 +76,14 @@ def plot(
             count += 1
             for i in range(system.num_particles):
                 ax.scatter(
-                        system.x[i, 0], system.x[i, 1], system.x[i, 2], marker="o", color=colors[i], label=labels[i]
+                        system.x[i, 0], system.x[i, 1], system.x[i, 2],
+                        marker="o", color=colors[i],
+                        label=labels[i] if count == 1 else "_nolegend_"
                 )
                 plt.pause(0.01)
+
+            if legend and count == 1:
+                ax.legend()
 
             current_time = str(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
             # Set labels
@@ -176,3 +178,8 @@ def si_euler(system: System, dt: float, a: np.ndarray) -> np.ndarray:
         system.x += system.v * dt
 
         # return a
+
+def planet_math():
+      """
+      Converting cartesian coordinates to RA/DEC from the perspective of a location on Earth
+      """
