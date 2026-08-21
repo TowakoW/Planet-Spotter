@@ -7,6 +7,7 @@ from planet_data import System
 import matplotlib.pyplot as plt
 from datetime import datetime
 # from planet_data import System
+from typing import Literal
 
 # Constants:
 
@@ -178,8 +179,4 @@ def si_euler(system: System, dt: float, a: np.ndarray) -> np.ndarray:
         system.x += system.v * dt
 
         # return a
-
-def planet_math():
-      """
-      Converting cartesian coordinates to RA/DEC from the perspective of a location on Earth
-      """
+    
