@@ -43,3 +43,15 @@ https://ssd.jpl.nasa.gov/horizons/
 
 "5 steps to N-body simulation" by alvinng4:
 https://alvinng4.github.io/grav_sim/5_steps_to_n_body_simulation/
+
+### Libraries Used:
+* numpy
+* matplotlib.pyplot
+* plotly (web visualization)
+* requests
+* astropy
+* urllib.parse
+* sys
+* json
+* datetime
+* Typing
