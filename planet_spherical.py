@@ -10,7 +10,7 @@ from datetime import datetime
 # from typing import Literal
 
 
-def planet_math(system: System) -> np.ndarray:
+def cart_to_sph(system: System) -> np.ndarray:
     """
     Converting cartesian coordinates to RA/DEC from the perspective of a location on Earth
 
@@ -39,9 +39,9 @@ def planet_math(system: System) -> np.ndarray:
     return np.array(asc, dec, r)
 
 
-def zero_cart(system: System, location: str):
+def center_observer(system: System, labels):
     """
-    Recalculates system center to topocentric coordinates. 
+    Converts system center to a point on Earth (topocentric coordinates). 
 
     Parameters
     -----
@@ -50,3 +50,14 @@ def zero_cart(system: System, location: str):
     location: str
         latitude/longitude/LST coordinates on the Earth to be the obervation site
     """
+    # Defining x, y, and z within system.x for convenience:
+    # x_pos = system.x[0]
+    # y_pos = system.x[1]
+    # z_pos = system.x[2]
+
+    earth_index = labels.index("Earth")
+    earth_pos = system.x[earth_index]
+
+    earth_center_pos = system.x - earth_pos
+
+    return earth_center_pos
