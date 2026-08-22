@@ -36,7 +36,7 @@ def cart_to_sph(system: System) -> np.ndarray:
     r = np.sqrt(x_pos**2 + y_pos**2 + z_pos**2)
     dec = np.arcsin(z_pos/r)
     asc = np.atan2(y_pos, x_pos)
-    return np.array(asc, dec, r)
+    return np.array(r, asc, dec)
 
 
 def center_observer(system: System, labels):
