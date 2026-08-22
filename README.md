@@ -13,18 +13,18 @@ Real-time information is fetched from NASA JPL Horizons API for all planets in t
 
 The received output is parsed to take only each object's GM (km^3/s^2) and ephemeris data (x, y, z, vx, vy, vz).
 
-## Step 2: Initial Plotting
+### Step 2: Initial Plotting
 > planet_data.py
 > planet_calc.py
 
 The parsed data is plotted on a 3d graph with Matplotlib.pyplot. 
 
-## Step 3: Physics Simulation
+### Step 3: Physics Simulation
 > planet_calc.py
 
 Using the Semi-Implicit Euler method, the locations of the planets are calculated and updated on the graph. 
 
-## Step 4: Translating to Local Perspectives
+### Step 4: Translating to Local Perspectives
 Fetching location information from APIs:
 
 Fetch IP-address: (ipify)[https://www.ipify.org/]
