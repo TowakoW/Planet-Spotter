@@ -29,7 +29,7 @@ Fetching location information from APIs:
 
 Fetch IP-address: (ipify)[https://www.ipify.org/]
 
-Fetch rough geographical location: (ip-api.com)[ip-api.com]
+Fetch rough geographical location: (ip-api.com)[https://ip-api.com/]
 
 Convert to topocentric view with the earth in the middle, then convert to spherical coordinates. 
 
