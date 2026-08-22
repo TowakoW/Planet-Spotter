@@ -38,11 +38,11 @@ work in progress...
 Continue converting to spherical and find a way to map visible stars relative to geographic observer coordinates!!
 
 ## Resources
-NASA JPL Horizons API:
-https://ssd.jpl.nasa.gov/horizons/
-
-"5 steps to N-body simulation" by alvinng4:
-https://alvinng4.github.io/grav_sim/5_steps_to_n_body_simulation/
+### APIs Used:
+* (NASA JPL Horizons API)[https://ssd.jpl.nasa.gov/horizons/]
+* ("5 steps to N-body simulation" by alvinng4)[https://alvinng4.github.io/grav_sim/5_steps_to_n_body_simulation/]
+* (ipify)[https://www.ipify.org/]
+* (ip-api.com)[https://ip-api.com/]
 
 ### Libraries Used:
 * numpy
