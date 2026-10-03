@@ -64,8 +64,11 @@ Shot taken on Aug 23, 2026 at 1:15 AM
 <img src="SolarSystemObjLocations.png" alt="Shot taken on Aug 23, 2026 at 1:27 AM">
 
 ### Next Steps: 
-- Add moons
-- Visual representation on cartesian graph showing visible part of night sky?
+- Add moons (canceled)
+- Visual representation on cartesian graph showing visible part of night sky? (eh.)
+
+### Edits:
+- 10/2/26: I noticed the planet locations were wrong - apparantly a result of a typo as well as inaccurate approximation in the LST math. Should be fixed! Currently keeping an eye on it...
 
 ## Resources
 ### APIs Used:

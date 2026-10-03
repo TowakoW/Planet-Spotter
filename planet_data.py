@@ -88,10 +88,10 @@ def get_initial_conditions(initial_condition: dict
         neptune_data = horizons_specifics(899)[0]
         pluto_data = horizons_specifics(999)[0]
         moon_data = horizons_specifics(301)[0]
-        phobos_data = horizons_specifics(401)[0]
-        deimos_data = horizons_specifics(402)[0]
-        io_data = horizons_specifics(501)[0]
-        europa_data = horizons_specifics(502)[0]
+        # phobos_data = horizons_specifics(401)[0]
+        # deimos_data = horizons_specifics(402)[0]
+        # io_data = horizons_specifics(501)[0]
+        # europa_data = horizons_specifics(502)[0]
         # ganymede_data = horizons_specifics(503)[0]
 
 
@@ -117,10 +117,10 @@ def get_initial_conditions(initial_condition: dict
                 "Neptune": neptune_data['gm'],
                 "Pluto": pluto_data['gm'],
                 "Moon": moon_data['gm'],
-                "Phobos": phobos_data['gm'] if phobos_data['gm'] is not None else GM_FALLBACK["Phobos"],
-                "Deimos": deimos_data['gm'] if deimos_data['gm'] is not None else GM_FALLBACK["Deimos"],
-                'Io': io_data['gm'],
-                "Europa": europa_data['gm'] if europa_data['gm'] is not None else GM_FALLBACK["Europa"],
+                # "Phobos": phobos_data['gm'] if phobos_data['gm'] is not None else GM_FALLBACK["Phobos"],
+                # "Deimos": deimos_data['gm'] if deimos_data['gm'] is not None else GM_FALLBACK["Deimos"],
+                # 'Io': io_data['gm'],
+                # "Europa": europa_data['gm'] if europa_data['gm'] is not None else GM_FALLBACK["Europa"],
                 # "Ganymede": ganymede_data['gm']
         }
         
@@ -142,10 +142,10 @@ def get_initial_conditions(initial_condition: dict
         neptune_eph = neptune_data['ephemeris']
         pluto_eph = pluto_data['ephemeris']
         moon_eph = moon_data['ephemeris']
-        phobos_eph = phobos_data['ephemeris']
-        deimos_eph = deimos_data['ephemeris']
-        io_eph = io_data['ephemeris']
-        europa_eph = europa_data['ephemeris']
+        # phobos_eph = phobos_data['ephemeris']
+        # deimos_eph = deimos_data['ephemeris']
+        # io_eph = io_data['ephemeris']
+        # europa_eph = europa_data['ephemeris']
         # ganymede_eph = ganymede_data['ephemeris']
 
 
@@ -162,10 +162,10 @@ def get_initial_conditions(initial_condition: dict
             "Neptune": neptune_eph[0][2:5],
             "Pluto": pluto_eph[0][2:5],
             "Moon": moon_eph[0][2:5],
-            "Phobos": phobos_eph[0][2:5],
-            "Deimos": deimos_eph[0][2:5],
-            "Io": io_eph[0][2:5],
-            "Europa": europa_eph[0][2:5],
+            # "Phobos": phobos_eph[0][2:5],
+            # "Deimos": deimos_eph[0][2:5],
+            # "Io": io_eph[0][2:5],
+            # "Europa": europa_eph[0][2:5],
             # "Ganymede": ganymede_eph[0][2:5]
         }
 
@@ -181,10 +181,10 @@ def get_initial_conditions(initial_condition: dict
             "Neptune": neptune_eph[0][5:8],
             "Pluto": pluto_eph[0][5:8],
             "Moon": moon_eph[0][5:8],
-            "Phobos": phobos_eph[0][5:8],
-            "Deimos": deimos_eph[0][5:8],
-            "Io": io_eph[0][5:8],
-            "Europa": europa_eph[0][5:8],
+            # "Phobos": phobos_eph[0][5:8],
+            # "Deimos": deimos_eph[0][5:8],
+            # "Io": io_eph[0][5:8],
+            # "Europa": europa_eph[0][5:8],
             # "Ganymede": ganymede_eph[0][5:8]
             }
 
@@ -199,11 +199,11 @@ def get_initial_conditions(initial_condition: dict
                 "Uranus": 'olive',
                 "Neptune": 'teal',
                 "Pluto": 'aquamarine',
-                "Moon": 'grey',
-                "Phobos": 'forestgreen',
-                "Deimos": 'cornflowerblue',
-                "Io": 'lawngreen',
-                "Europa": 'pink',
+                "Moon": 'blue',
+                # "Phobos": 'forestgreen',
+                # "Deimos": 'cornflowerblue',
+                # "Io": 'lawngreen',
+                # "Europa": 'pink',
                 # "Ganymede": 'brown'
 
 
@@ -237,10 +237,10 @@ def get_initial_conditions(initial_condition: dict
             G9 = np.array(GM_AU_S["Neptune"])
             G10 = np.array(GM_AU_S["Pluto"])
             G11 = np.array(GM_AU_S["Moon"])
-            G12 = np.array(GM_AU_S["Phobos"])
-            G13 = np.array(GM_AU_S["Deimos"])
-            G14 = np.array(GM_AU_S['Io'])
-            G15 = np.array(GM_AU_S["Europa"])
+            # G12 = np.array(GM_AU_S["Phobos"])
+            # G13 = np.array(GM_AU_S["Deimos"])
+            # G14 = np.array(GM_AU_S['Io'])
+            # G15 = np.array(GM_AU_S["Europa"])
             # G16 = np.array(GM_AU_S['Ganymede'])
             
             R1 = np.array(SOLAR_SYSTEM_POS["Sun"], dtype=float)
@@ -254,10 +254,10 @@ def get_initial_conditions(initial_condition: dict
             R9 = np.array(SOLAR_SYSTEM_POS["Neptune"], dtype=float)
             R10 = np.array(SOLAR_SYSTEM_POS["Pluto"], dtype=float)
             R11 = np.array(SOLAR_SYSTEM_POS["Moon"], dtype=float)
-            R12 = np.array(SOLAR_SYSTEM_POS["Phobos"], dtype=float)
-            R13 = np.array(SOLAR_SYSTEM_POS["Deimos"], dtype=float)
-            R14 = np.array(SOLAR_SYSTEM_POS["Io"], dtype=float)
-            R15 = np.array(SOLAR_SYSTEM_POS["Europa"], dtype=float)
+            # R12 = np.array(SOLAR_SYSTEM_POS["Phobos"], dtype=float)
+            # R13 = np.array(SOLAR_SYSTEM_POS["Deimos"], dtype=float)
+            # R14 = np.array(SOLAR_SYSTEM_POS["Io"], dtype=float)
+            # R15 = np.array(SOLAR_SYSTEM_POS["Europa"], dtype=float)
             # R16 = np.array(SOLAR_SYSTEM_POS["Ganymede"], dtype=float)
 
 
@@ -273,10 +273,10 @@ def get_initial_conditions(initial_condition: dict
             V9 = np.array(SOLAR_SYSTEM_VEL["Neptune"], dtype=float)
             V10 = np.array(SOLAR_SYSTEM_VEL["Pluto"], dtype=float)
             V11 = np.array(SOLAR_SYSTEM_VEL["Moon"], dtype=float)
-            V12 = np.array(SOLAR_SYSTEM_VEL["Phobos"], dtype=float)
-            V13 = np.array(SOLAR_SYSTEM_VEL["Deimos"], dtype=float)
-            V14 = np.array(SOLAR_SYSTEM_VEL["Io"], dtype=float)
-            V15 = np.array(SOLAR_SYSTEM_VEL["Europa"], dtype=float)
+            # V12 = np.array(SOLAR_SYSTEM_VEL["Phobos"], dtype=float)
+            # V13 = np.array(SOLAR_SYSTEM_VEL["Deimos"], dtype=float)
+            # V14 = np.array(SOLAR_SYSTEM_VEL["Io"], dtype=float)
+            # V15 = np.array(SOLAR_SYSTEM_VEL["Europa"], dtype=float)
             # V16 = np.array(SOLAR_SYSTEM_VEL["Ganymede"], dtype=float)
 
 
@@ -293,10 +293,10 @@ def get_initial_conditions(initial_condition: dict
                          G9,
                          G10,
                          G11,
-                         G12,
-                         G13,
-                         G14,
-                         G15,
+                        #  G12,
+                        #  G13,
+                        #  G14,
+                        #  G15,
                         #  G16
                    ]
             )
@@ -314,10 +314,10 @@ def get_initial_conditions(initial_condition: dict
                         R9,
                         R10,
                         R11,
-                        R12,
-                        R13,
-                        R14,
-                        R15,
+                        # R12,
+                        # R13,
+                        # R14,
+                        # R15,
                         # R16
                     ]
                 )
@@ -334,16 +334,16 @@ def get_initial_conditions(initial_condition: dict
                         V9,
                         V10,
                         V11,
-                        V12,
-                        V13,
-                        V14,
-                        V15,
+                        # V12,
+                        # V13,
+                        # V14,
+                        # V15,
                         # V16
                     ]
                 )
 
             system = System(
-                num_particles= 15,
+                num_particles= 12,
                 Gm=Gm,
                 x=x,
                 v=v,

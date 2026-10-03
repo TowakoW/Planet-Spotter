@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 # from planet_data import System
 from typing import Literal
-from planet_spherical import center_observer, cart_to_sph
+from planet_spherical import center_earth, cart_to_sph
 
 # Constants:
 
@@ -78,7 +78,7 @@ def plot(
         # loop
         # while plotting:
         #     count += 1
-        centered_positions = center_observer(system, labels)
+        centered_positions = center_earth(system, labels)
         for i in range(system.num_particles):
             ax.scatter(
                     centered_positions[i, 0], centered_positions[i, 1], centered_positions[i, 2],

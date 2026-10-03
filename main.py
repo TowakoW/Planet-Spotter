@@ -3,7 +3,7 @@ from horizons_parse import horizons_specifics
 import planet_calc
 import numpy as np
 from datetime import datetime
-from planet_spherical import center_observer, cart_to_sph
+from planet_spherical import center_earth, cart_to_sph
 from sky_map import sky_plot, sph_calc
 import matplotlib.pyplot as plt
 import base64
@@ -60,14 +60,7 @@ def main() -> None:
 
         #-----Polar Projection-----
         alt_az = sph_calc(system, labels)
-
-        sky_plot(system, 
-                 labels, 
-                 colors, 
-                 legend, 
-                 alt_az,
-                 polar_ax
-                 )
+        sky_plot(system, labels, colors, legend, alt_az, polar_ax)
 
         #-----Cartesian Projection (LIVE)-----
         continue_running = True

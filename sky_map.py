@@ -2,7 +2,7 @@
 
 
 # imports
-from planet_spherical import cart_to_sph, alt_azmuth, find_RA_DEC
+from planet_spherical import alt_azmuth, find_RA_DEC, observer_loc
 import numpy as np
 from planet_data import System
 import matplotlib.pyplot as plt
@@ -12,12 +12,16 @@ def sph_calc(
         system: System,
         labels: list,
 ):
+    observer = observer_loc()
+    lat = observer["observer lat"]
+    lon = observer["observer lon"]
+
     spherical_positions = find_RA_DEC(system, labels)
 
     # get altitude and azimuth
     alt_az_positions = []
     for radius, ra, dec in spherical_positions:
-        altitude, azimuth = alt_azmuth(ra, dec)
+        altitude, azimuth = alt_azmuth(ra, dec, lat, lon)
         alt_az_positions.append([altitude, azimuth])
 
     return np.array(alt_az_positions)
@@ -33,39 +37,31 @@ def sky_plot(
     Plot polar graph scatterplot showing locations where objects can be found for night sky
     """
 
-    # fig = plt.figure(figsize=(7, 7))
-    # ax = fig.add_subplot(111, projection='polar')
-
     ax.clear()
 
-    # match astronomical conventions
-    ax.set_theta_zero_location('N') # put 0 degrees (north) at top
-    ax.set_theta_direction(-1) # make angles increase clockwise
-
-    # altitude to radial dist from center
+    ax.set_theta_zero_location('N')
+    ax.set_theta_direction(-1)
     ax.set_rmax(90)
     ax.set_rmin(0)
-
-    # replace radial labels w altitude markings
     ax.set_rticks([0, 30, 60, 90])
     ax.set_yticklabels(['90°', '60°', '30°', '0° (horizon)'])
-
-    # compass label appearance
     ax.set_xticks(np.arange(8) * (np.pi / 4))
     ax.set_xticklabels(['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'])
 
-    # loop and plot visible planets
+    filtered_labels = [name for name in labels if name != "Earth"]
+    if len(filtered_labels) != len(alt_az):
+        raise ValueError(
+            f"Label and sky data length mismatch: {len(filtered_labels)} labels, {len(alt_az)} sky entries"
+        )
+
     legend_handles = []
     for index, alt_az_data in enumerate(alt_az):
-        name = labels[index]
-        if name == "Earth":
-            continue
-
+        name = filtered_labels[index]
         alt_rad, az_rad = alt_az_data[0], alt_az_data[1]
         alt_deg = np.degrees(alt_rad)
 
-        # Keep the label in the legend even when the object is below the horizon.
         if legend:
+            color = colors[labels.index(name)]
             legend_handles.append(
                 plt.Line2D(
                     [],
@@ -73,19 +69,18 @@ def sky_plot(
                     linestyle='',
                     marker='o',
                     markersize=8,
-                    markerfacecolor=colors[index],
-                    markeredgecolor=colors[index],
+                    markerfacecolor=color,
+                    markeredgecolor=color,
                     label=name,
                 )
             )
 
-        # Filter only obj above horizon line
         if alt_deg < 0:
             print(f"Skipping {name}: Hidden below horizon (ALT: {alt_deg:.1f}°)")
             continue
 
         r_plot = 90.0 - alt_deg
-        ax.scatter(az_rad, r_plot, c=colors[index], s=100, label=name, zorder=3)
+        ax.scatter(az_rad, r_plot, c=colors[labels.index(name)], s=100, label=name, zorder=3)
 
     if legend:
         ax.legend(handles=legend_handles, loc='upper left')
@@ -94,7 +89,6 @@ def sky_plot(
     ax.plot(theta, np.full_like(theta, 90), color="black", linewidth=1)
 
     time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
     ax.set_title(
         f"Local Sky View (Topocentric Polar Projection)\nTime: {time}",
         pad=18,
@@ -102,7 +96,6 @@ def sky_plot(
     )
     plt.grid(True, linestyle='--', alpha=0.6)
     ax.figure.tight_layout()
-    # plt.show()
 
 
 

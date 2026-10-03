@@ -6,7 +6,6 @@ import numpy as np
 from planet_data import System
 import matplotlib.pyplot as plt
 from datetime import datetime
-# from planet_spherical import cart_to_sph, center_observer
 from steal_data import find_LST, fetch_coords
 import math
 # from planet_data import System
@@ -40,7 +39,7 @@ def cart_to_sph(position: np.ndarray) -> np.ndarray:
     return np.array([r, asc, dec])
 
 
-def center_observer(system: System, labels):
+def center_earth(system: System, labels):
     """
     Converts system center to a point on Earth (topocentric coordinates). 
 
@@ -63,7 +62,27 @@ def center_observer(system: System, labels):
 
     return earth_center_pos
 
-def alt_azmuth(ra, dec):
+def observer_loc():
+    """
+    Determines location of observer relative to Earth's location.
+
+    Parameters
+    -----
+    center_earth: list(?) * i should check this..
+        output for center_earth
+    """
+    coordinates = fetch_coords()
+    lat_obs = float(coordinates[0])
+    lon_obs = float(coordinates[1])
+
+    return{
+            "observer lat": lat_obs,
+            "observer lon": lon_obs
+    }
+
+    
+
+def alt_azmuth(ra, dec, lat_deg, long_deg):
     """
     Calculate hour angle, altitude, and azimuth using spherical coordinates
     
@@ -84,14 +103,15 @@ def alt_azmuth(ra, dec):
 
     azimuth (A) = arccos((sin(dec)-sin(a)sin(lat))/cos(a)cos(lat))
     """
-    coordinates = fetch_coords()
-    LST = find_LST(coordinates)
+    # coordinates = fetch_coords()
+    LST = find_LST(np.array([lat_deg, long_deg]))
     LST_rad = LST * (np.pi/180)
+    lat_rad = lat_deg * (np.pi/180)
 
-    lat = coordinates[0]
+    # lat = coordinates[0]
     # lon = coordinates[1]
     # latitude radians
-    lat_rad = lat * (math.pi/180)
+    # lat_rad = lat_deg * (math.pi/180)
 
     # calculate hour angle (rad)
     H = LST_rad - ra
@@ -133,7 +153,7 @@ def find_RA_DEC(system, labels):
     labels: list
         system labels
     """
-    centered_positions = center_observer(system, labels)
+    centered_positions = center_earth(system, labels)
     positions = []
 
     for index, label in enumerate(labels):
